@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:28:12 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/09 20:42:23 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/09 22:09:10 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	main(int ac, char **av)
 	init_arg(&input, ac, av);
 	if (pthread_mutex_init(&main.write_mutex, NULL) != 0)
 		return (1);
+	main.start_time = get_starttime(NULL);
 	if (init_fork(&input, fork) != 0)
 		return (1);
-	main.start_time = get_starttime(NULL);
 	if (init_philo(input, fork, main, philo) != 0)
 		return (1);
 	return (check_state(philo, input));

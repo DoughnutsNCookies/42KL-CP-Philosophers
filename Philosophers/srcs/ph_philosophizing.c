@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:01:15 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/09 20:47:13 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/09 22:08:20 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	eat(t_philo *philo, int sleeping)
 	get_message(philo, philo->n, "is eating");
 	usleep(philo->input.eat_time * 1000);
 	pthread_mutex_lock(&(philo->philo_mutex));
-	printf("PN: %d ATE: %d\n", philo->n, philo->eat_total);
 	philo->eat_total++;
 	calculate_time(philo, sleeping);
 	pthread_mutex_unlock(&(philo->philo_mutex));
@@ -72,15 +71,12 @@ void	*routine(void *arg)
 	if (((t_philo *)arg)->n % 2 == 0)
 		usleep(2500);
 	eat((t_philo *)arg, 0);
-	get_message((t_philo *)arg, ((t_philo *)arg)->n, "is sleeping");
-	usleep(((t_philo *)arg)->input.sleep_time * 1000);
-	get_message((t_philo *)arg, ((t_philo *)arg)->n, "is thinking");
 	while (1)
 	{
-		eat((t_philo *)arg, 1);
 		get_message((t_philo *)arg, ((t_philo *)arg)->n, "is sleeping");
 		usleep(((t_philo *)arg)->input.sleep_time * 1000);
 		get_message((t_philo *)arg, ((t_philo *)arg)->n, "is thinking");
+		eat((t_philo *)arg, 1);
 	}
 	return (NULL);
 }

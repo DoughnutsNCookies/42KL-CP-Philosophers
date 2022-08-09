@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:29:15 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/09 19:42:48 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/09 22:06:48 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ typedef struct s_philo
 {
 	int				n;
 	int				eat_total;
-	t_input			input;
+	struct s_input	input;
 	t_fork			*left;
 	t_fork			*right;
-	t_main			main;
+	struct s_main	main;
 	pthread_mutex_t	philo_mutex;
 	struct timeval	last_ate;
 }	t_philo;
