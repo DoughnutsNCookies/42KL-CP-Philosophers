@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:32:05 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/09 22:06:40 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/10 13:46:53 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	check_is_dead(t_philo *philo)
 }
 
 /* DONE CHECKIN */
-int	check_state(t_philo *philo, t_input input)
+int	check_state(t_philo *philo)
 {
 	int	i;
 	int	end;
@@ -38,18 +38,20 @@ int	check_state(t_philo *philo, t_input input)
 	while (1)
 	{
 		end = 0;
-		i = -1;
-		while (++i < input.n_philo)
+		i = 0;
+		while (i < philo->input.n_philo)
 		{
-			pthread_mutex_lock(&philo[i].philo_mutex);
-			if (input.eat_req && philo->eat_total > input.eat_max - 1)
-				end = 1;
-			pthread_mutex_unlock(&philo[i].philo_mutex);
+			pthread_mutex_lock(&(philo->philo_mutex));
+			if (philo->input.eat_req)
+				if (philo->eat_total > philo->input.eat_max)
+					end = 1;
+			pthread_mutex_unlock(&(philo->philo_mutex));
 			if (check_is_dead(&philo[i]))
 			{
 				get_message(philo, philo->n, "died");
 				return (1);
 			}
+			i++;
 		}
 		if (end)
 			return (0);

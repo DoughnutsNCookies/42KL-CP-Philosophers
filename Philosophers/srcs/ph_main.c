@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:28:12 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/09 22:09:10 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/10 13:45:17 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ static int	check_valid(int ac, char **av)
 	return (0);
 }
 
+int	force_death(t_philo philo)
+{
+	usleep(philo.input.death_time * 1000);
+	printf("%d\t %d died\n", philo.input.death_time, philo.n);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_input	input;
@@ -47,5 +54,7 @@ int	main(int ac, char **av)
 		return (1);
 	if (init_philo(input, fork, main, philo) != 0)
 		return (1);
-	return (check_state(philo, input));
+	if (ft_atoi(av[1]) == 1)
+		return (force_death(philo[0]));
+	return (check_state(philo));
 }

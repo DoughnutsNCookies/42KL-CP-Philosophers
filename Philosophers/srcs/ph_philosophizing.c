@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:01:15 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/09 22:08:20 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/10 12:59:41 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ static void	eat(t_philo *philo, int sleeping)
 	pthread_mutex_lock(&(right->fork_mutex));
 	get_message(philo, philo->n, "has taken a fork");
 	get_message(philo, philo->n, "is eating");
-	usleep(philo->input.eat_time * 1000);
 	pthread_mutex_lock(&(philo->philo_mutex));
 	philo->eat_total++;
+	pthread_mutex_unlock(&(philo->philo_mutex));
+	usleep(philo->input.eat_time * 1000);
+	pthread_mutex_lock(&(philo->philo_mutex));
 	calculate_time(philo, sleeping);
 	pthread_mutex_unlock(&(philo->philo_mutex));
 	pthread_mutex_unlock(&(left->fork_mutex));

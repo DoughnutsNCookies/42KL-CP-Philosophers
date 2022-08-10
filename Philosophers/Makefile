@@ -6,14 +6,16 @@
 #    By: schuah <schuah@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 10:52:13 by schuah            #+#    #+#              #
-#    Updated: 2022/08/09 17:03:24 by schuah           ###   ########.fr        #
+#    Updated: 2022/08/10 13:48:37 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	philo
 CC			=	gcc
 RM			=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror -pthread -g -fsanitize=thread
+CFLAGS		=	-Wall -Wextra -Werror
+# CFLAGS		+= 	-pthread
+# CFLAGS		+= 	-g -fsanitize=thread
 SRCS_FILES	=	ph_main \
 				ph_init \
 				ph_libft \

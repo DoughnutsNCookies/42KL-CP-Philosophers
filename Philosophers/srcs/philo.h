@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:29:15 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/09 22:06:48 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/10 13:44:46 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ int				init_philo(t_input input, t_fork *fork,
 /* Getters */
 struct timeval	get_starttime(void *timezone);
 void			get_message(t_philo *philo, int i, char *str);
+int				force_death(t_philo philo);
 
 /* Checkers */
-int				check_state(t_philo *philo, t_input input);
+int				check_state(t_philo *philo);
 
 /* Philosophizing */
 void			*routine(void *arg);
