@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:35:22 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 16:47:22 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/15 21:08:42 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	main(int ac, char **av)
 	philo.pid = malloc(sizeof(pid_t) * input.n_philo);
 	if (philo.pid == NULL)
 		return (1);
+	if (init_philo(&philo, input) == 1)
+	{
+		free(philo.pid);
+		return (1);
+	}
 	printf("PHILO: %d", input.n_philo);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 10:52:13 by schuah            #+#    #+#              #
-#    Updated: 2022/08/15 16:42:57 by schuah           ###   ########.fr        #
+#    Updated: 2022/08/15 21:10:39 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ SRCS_FILES	=	ph_main \
 				ph_philosophizing
 BNS_FILES	=	ph_main_bonus \
 				ph_init_bonus \
-				ph_libft_bonus
+				ph_libft_bonus \
+				ph_getters_bonus \
+				ph_philosophizing
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 BNS			= 	$(addprefix $(BNS_DIR), $(addsuffix .c, $(BNS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))

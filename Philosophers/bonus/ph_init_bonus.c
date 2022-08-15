@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:36:58 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 16:37:58 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/15 21:17:54 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,46 @@ void	init_arg(t_input *input, int ac, char **av)
 		input->eat_max = ft_atoi(av[5]);
 		input->eat_req = 1;
 	}
+}
+
+/* Try removing sem_unlink */
+static int	init_sema(t_philo *philo, t_input input)
+{
+	sem_unlink("fork");
+	sem_unlink("sema");
+	sem_unlink("read");
+	sem_unlink("write");
+	philo->fork = sem_open("fork", O_CREAT, S_IRWXU, input.n_philo);
+	if (philo->fork == SEM_FAILED)
+		return (1);
+	philo->sema = sem_open("sema", O_CREAT, S_IRWXU, 0);
+	if (philo->sem == SEM_FAILED)
+		return (1);
+	philo->read = sem_open("read", O_CREAT, S_IRWXU, 1);
+	if (philo->read == SEM_FAILED)
+		return (1);
+	philo->write = sem_open("write", O_CREAT, S_IRWXU, 1);
+	if (philo->write == SEM_FAILED)
+		return (1);
+	return (0);
+}
+
+int	init_philo(t_philo *philo, t_input input)
+{
+	if (init_sema(philo, input) == -1)
+		return (1);
+	philo->start_time = get_starttime(NULL);
+	philo->last_ate = philo->start_time;
+	philo->input = input;
+	philo->n = 1;
+	while (philo->n <= input.n_philo)
+	{
+		philo->pid[philo->n] = fork();
+		if (philo->pid[philo->n] == -1)
+			return (1);
+		if (philo->pid[philo->n] == 0)
+			routine(philo);
+		philo->number++;
+	}
+	check_state(philo, input.n_philo);
 }
