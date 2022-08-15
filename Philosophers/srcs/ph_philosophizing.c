@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philosophizing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:01:15 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/10 12:59:41 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/15 15:56:30 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* DONE CHECKING */
+/* Puts the forks into the philosophers' respective hands */
 static void	put_fork_in_hand(t_philo *philo, t_fork **left, t_fork **right)
 {
 	*left = philo->right;
@@ -24,7 +24,8 @@ static void	put_fork_in_hand(t_philo *philo, t_fork **left, t_fork **right)
 	}
 }
 
-/* DONE CHECKING */
+/* Calculates and updates the last time the philosopher ate
+** based on eating time & sleeping time */
 static void	calculate_time(t_philo *philo, int sleeping)
 {
 	philo->last_ate.tv_sec += philo->input.eat_time * 1000;
@@ -44,7 +45,7 @@ static void	calculate_time(t_philo *philo, int sleeping)
 	}
 }
 
-/* DONE CHECKING */
+/* Locks the forks when the philosopher is eating, unlocks when finished */
 static void	eat(t_philo *philo, int sleeping)
 {
 	t_fork	*left;
@@ -67,7 +68,7 @@ static void	eat(t_philo *philo, int sleeping)
 	pthread_mutex_unlock(&(right->fork_mutex));
 }
 
-/* DONE CHECKING */
+/* The routine each philosopher has to go through for the rest of their lives */
 void	*routine(void *arg)
 {
 	if (((t_philo *)arg)->n % 2 == 0)

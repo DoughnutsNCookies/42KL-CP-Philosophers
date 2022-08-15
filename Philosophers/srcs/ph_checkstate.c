@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ph_checkstate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:32:05 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/10 13:46:53 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/15 15:51:33 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/* Returns 1 if the philosopher is dead, otherwise returns 0 */
 static int	check_is_dead(t_philo *philo)
 {
 	struct timeval	curr;
@@ -29,7 +30,7 @@ static int	check_is_dead(t_philo *philo)
 	return (0);
 }
 
-/* DONE CHECKIN */
+/* Checks the state of the philosopher during the simulation */
 int	check_state(t_philo *philo)
 {
 	int	i;

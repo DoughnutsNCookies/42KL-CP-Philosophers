@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ph_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:18:08 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/10 12:40:53 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/15 15:53:32 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* DONE DOUBLE CHECKING */
+/* Initializes the variables into the struct based on the user input */
 void	init_arg(t_input *input, int ac, char **av)
 {
 	input->n_philo = ft_atoi(av[1]);
@@ -28,7 +28,7 @@ void	init_arg(t_input *input, int ac, char **av)
 	}
 }
 
-/* DONE DOUBLE CHECKING */
+/* Initializes the fork mutexs for each number of philosophers */
 int	init_fork(t_input *input, t_fork *fork)
 {
 	int	i;
@@ -43,7 +43,7 @@ int	init_fork(t_input *input, t_fork *fork)
 	return (0);
 }
 
-/* DONE CHECKING */
+/* Initializes the philosohers and their respective mutexes */
 int	init_philo(t_input input, t_fork *fork, t_main main, t_philo *philo)
 {
 	int			i;

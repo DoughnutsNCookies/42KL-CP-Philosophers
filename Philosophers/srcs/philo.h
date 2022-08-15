@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:29:15 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/10 13:44:46 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/15 16:30:53 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 
 typedef struct s_input
 {
-	int		n_philo;
-	int		eat_req;
-	int		eat_max;
-	int		death_time;
-	int		eat_time;
-	int		sleep_time;
+	int	n_philo;
+	int	eat_req;
+	int	eat_max;
+	int	death_time;
+	int	eat_time;
+	int	sleep_time;
 }	t_input;
 
 typedef struct s_fork
