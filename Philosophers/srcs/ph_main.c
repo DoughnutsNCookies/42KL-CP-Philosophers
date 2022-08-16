@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:28:12 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/16 13:56:11 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 15:21:10 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	force_death(t_philo philo)
 {
 	usleep(philo.input.death_time * 1000);
 	printf("%d\t %d died\n", philo.input.death_time, philo.n);
-	return (1);
+	return (0);
 }
 
 /* Start of the main function */

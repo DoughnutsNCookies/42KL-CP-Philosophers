@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:32:05 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 21:34:29 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 15:21:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_state(t_philo *philo)
 			if (check_is_dead(&philo[i]))
 			{
 				get_message(philo, philo->n, "died");
-				return (1);
+				return (0);
 			}
 			i++;
 		}

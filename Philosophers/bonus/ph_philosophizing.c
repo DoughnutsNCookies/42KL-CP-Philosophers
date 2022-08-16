@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 21:10:16 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/16 13:59:33 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 15:32:40 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	*check_death(void *args)
 		}
 	}
 	finish_and_exit((t_philo *)args);
+	return (NULL);
 }
 
 /* Resets philosopher's last ate time and reduce its max eat by one each eat */
@@ -72,6 +73,7 @@ void	routine(t_philo *philo)
 	}
 }
 
+/* Waits when max_eat has reached <= 0, then finish and exit per philosopher */
 void	check_stomach(t_philo *philo, t_input input)
 {
 	int		i;
@@ -89,6 +91,7 @@ void	check_stomach(t_philo *philo, t_input input)
 	}
 }
 
+/* Finishes the simulation and exits the program cleanly */
 void	finish_and_exit(t_philo *philo)
 {
 	waitpid(-1, NULL, 0);
