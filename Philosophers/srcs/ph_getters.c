@@ -6,13 +6,13 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:12:25 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 15:52:11 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 14:02:18 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* Gets the time in int form */
+/* Gets the current time in int form */
 static int	get_time(struct timeval old, void *timezone)
 {
 	static struct timeval	time;
@@ -22,7 +22,7 @@ static int	get_time(struct timeval old, void *timezone)
 		+ ((time.tv_usec - old.tv_usec) / 1000));
 }
 
-/* Gets the time in struct timeval form */
+/* Gets the current time in struct timeval form */
 struct timeval	get_starttime(void *timezone)
 {
 	struct timeval	time;

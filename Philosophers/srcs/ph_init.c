@@ -6,13 +6,13 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:18:08 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 15:53:32 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 14:01:39 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* Initializes the variables into the struct based on the user input */
+/* Initializes the value into the struct based on the user input */
 void	init_arg(t_input *input, int ac, char **av)
 {
 	input->n_philo = ft_atoi(av[1]);

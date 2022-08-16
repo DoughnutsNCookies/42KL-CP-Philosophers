@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:11:03 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 15:54:26 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 14:00:03 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	is_space(int c)
 		|| c == '\f' || c == '\r' || c == ' ');
 }
 
-/* Converts a string of numbers into and integer */
+/* Converts a string of numbers into an integer */
 long	ft_atoi(const char *str)
 {
 	int		i;

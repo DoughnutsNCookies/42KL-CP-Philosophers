@@ -6,12 +6,13 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:36:58 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 21:17:54 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 14:01:37 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+/* Initializes the values into the struct based on the user input */
 void	init_arg(t_input *input, int ac, char **av)
 {
 	input->n_philo = ft_atoi(av[1]);
@@ -27,7 +28,7 @@ void	init_arg(t_input *input, int ac, char **av)
 	}
 }
 
-/* Try removing sem_unlink */
+/* Initializes the semaphore needed for the routine */
 static int	init_sema(t_philo *philo, t_input input)
 {
 	sem_unlink("fork");
@@ -38,7 +39,7 @@ static int	init_sema(t_philo *philo, t_input input)
 	if (philo->fork == SEM_FAILED)
 		return (1);
 	philo->sema = sem_open("sema", O_CREAT, S_IRWXU, 0);
-	if (philo->sem == SEM_FAILED)
+	if (philo->sema == SEM_FAILED)
 		return (1);
 	philo->read = sem_open("read", O_CREAT, S_IRWXU, 1);
 	if (philo->read == SEM_FAILED)
@@ -49,6 +50,7 @@ static int	init_sema(t_philo *philo, t_input input)
 	return (0);
 }
 
+/* Initializes the philosopher's value and starts the routine */
 int	init_philo(t_philo *philo, t_input input)
 {
 	if (init_sema(philo, input) == -1)
@@ -64,7 +66,9 @@ int	init_philo(t_philo *philo, t_input input)
 			return (1);
 		if (philo->pid[philo->n] == 0)
 			routine(philo);
-		philo->number++;
+		philo->n++;
 	}
-	check_state(philo, input.n_philo);
+	check_stomach(philo, input);
+	finish_and_exit(philo);
+	return (0);
 }

@@ -6,20 +6,13 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:39:02 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 21:32:24 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 14:02:22 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-struct timeval	get_starttime(void *timezone)
-{
-	struct timeval	new;
-
-	gettimeofday(&new, timezone);
-	return (new);
-}
-
+/* Gets the current time in int form */
 int	get_time(struct timeval old, void *timezone)
 {
 	static struct timeval	time;
@@ -29,11 +22,19 @@ int	get_time(struct timeval old, void *timezone)
 		+ ((time.tv_usec - old.tv_usec) / 1000));
 }
 
+/* Gets the current time in struct timeval form */
+struct timeval	get_starttime(void *timezone)
+{
+	struct timeval	new;
+
+	gettimeofday(&new, timezone);
+	return (new);
+}
+
 /* Prints out messages based on events */
 void	get_message(t_philo *philo, int i, char *str)
 {
 	sem_wait(philo->write);
-	printf("%d\t %d %s\n", get_time(philo->start_time, NULL),
-		i, str);
+	printf("%d\t %d %s\n", get_time(philo->start_time, NULL), i, str);
 	sem_post(philo->write);
 }

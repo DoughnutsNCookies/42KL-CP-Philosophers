@@ -6,34 +6,32 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 21:10:16 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 21:44:45 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 13:59:33 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-/* Try Change template and remove usleep */
+/* Prints and exits the program if the philosopher is dead */
 static void	*check_death(void *args)
 {
 	int		now;
-	t_philo	*philo;
 
-	philo = (t_philo *)args;
 	while (1)
 	{
-		sem_wait(philo->read);
-		now = get_time(philo->last_ate, NULL);
-		sem_post(philo->read);
-		if (time > philo->input.death_time)
+		sem_wait(((t_philo *)args)->read);
+		now = get_time(((t_philo *)args)->last_ate, NULL);
+		sem_post(((t_philo *)args)->read);
+		if (now > ((t_philo *)args)->input.death_time)
 		{
-			get_message(philo, philo->n, "died\n");
+			get_message((t_philo *)args, ((t_philo *)args)->n, "died");
 			break ;
 		}
-		usleep(500);
 	}
-	exit(0);
+	finish_and_exit((t_philo *)args);
 }
 
+/* Resets philosopher's last ate time and reduce its max eat by one each eat */
 static void	eat(t_philo *philo)
 {
 	struct timeval	now;
@@ -42,7 +40,7 @@ static void	eat(t_philo *philo)
 	sem_wait(philo->read);
 	philo->last_ate = now;
 	sem_post(philo->read);
-	get_message(philo, philo->n, "is eating\n");
+	get_message(philo, philo->n, "is eating");
 	usleep(philo->input.eat_time * 1000);
 	if (philo->input.eat_req)
 	{
@@ -52,6 +50,7 @@ static void	eat(t_philo *philo)
 	}
 }
 
+/* The routine each philosopher has to go through for the rest of their lives */
 void	routine(t_philo *philo)
 {
 	if (philo->n % 2 == 0)
@@ -61,14 +60,43 @@ void	routine(t_philo *philo)
 	while (1)
 	{
 		sem_wait(philo->fork);
-		get_message(philo, philo->n, "has taken a fork\n");
+		get_message(philo, philo->n, "has taken a fork");
 		sem_wait(philo->fork);
-		get_message(philo, philo->n, "has taken a fork\n");
+		get_message(philo, philo->n, "has taken a fork");
 		eat(philo);
 		sem_post(philo->fork);
 		sem_post(philo->fork);
-		get_message(philo, philo->n, "is sleeping\n");
+		get_message(philo, philo->n, "is sleeping");
 		usleep(philo->input.sleep_time * 1000);
-		get_message(philo, philo->n, "is thinking\n");
+		get_message(philo, philo->n, "is thinking");
 	}
+}
+
+void	check_stomach(t_philo *philo, t_input input)
+{
+	int		i;
+
+	if (philo->input.eat_req)
+	{
+		philo->stomach_process = fork();
+		if (philo->stomach_process != 0)
+			return ;
+		i = -1;
+		while (i++ < input.n_philo)
+			sem_wait(philo->sema);
+		sem_wait(philo->write);
+		finish_and_exit(philo);
+	}
+}
+
+void	finish_and_exit(t_philo *philo)
+{
+	waitpid(-1, NULL, 0);
+	kill(0, SIGINT);
+	free(philo->pid);
+	sem_close(philo->fork);
+	sem_close(philo->sema);
+	sem_close(philo->read);
+	sem_close(philo->write);
+	exit(0);
 }

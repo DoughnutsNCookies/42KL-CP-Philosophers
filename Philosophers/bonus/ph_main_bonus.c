@@ -6,12 +6,13 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:35:22 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 21:08:42 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 13:56:08 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+/* Returns 0 if the input is valid, else returns a positive number */
 static int	check_valid(int ac, char **av)
 {
 	int	i;
@@ -29,6 +30,7 @@ static int	check_valid(int ac, char **av)
 	return (0);
 }
 
+/* Start of the main function */
 int	main(int ac, char **av)
 {
 	t_input	input;
@@ -45,6 +47,5 @@ int	main(int ac, char **av)
 		free(philo.pid);
 		return (1);
 	}
-	printf("PHILO: %d", input.n_philo);
 	return (0);
 }

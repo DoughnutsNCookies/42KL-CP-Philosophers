@@ -6,13 +6,13 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:28:12 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/15 21:34:28 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 13:56:11 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* Checks whether the input is a valid input or not */
+/* Returns 0 if the input is valid, else returns a positive number */
 static int	check_valid(int ac, char **av)
 {
 	int	i;
