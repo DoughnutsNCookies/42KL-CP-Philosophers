@@ -6,7 +6,7 @@
 #    By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 10:52:13 by schuah            #+#    #+#              #
-#    Updated: 2022/08/16 16:03:41 by schuah           ###   ########.fr        #
+#    Updated: 2022/08/16 16:21:40 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,9 @@ SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 BNS			= 	$(addprefix $(BNS_DIR), $(addsuffix .c, $(BNS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 BNS_OBJS	=	$(addprefix $(BNS_DIR), $(addsuffix .c, $(BNS_FILES)))
-SRCS_DIR	=	srcs/
+SRCS_DIR	=	philo/
 OBJS_DIR	=	objs/
-BNS_DIR		=	bonus/
+BNS_DIR		=	philo_bonus/
 
 all:			$(NAME)
 
