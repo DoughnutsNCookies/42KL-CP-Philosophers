@@ -6,7 +6,7 @@
 #    By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 10:52:13 by schuah            #+#    #+#              #
-#    Updated: 2022/08/16 18:38:18 by schuah           ###   ########.fr        #
+#    Updated: 2022/09/21 14:16:37 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 				$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):		$(OBJS)
-				$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+				$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 				rm -rf $(OBJS_DIR)
