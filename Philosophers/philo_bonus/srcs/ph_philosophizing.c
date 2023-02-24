@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 21:10:16 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/16 15:32:40 by schuah           ###   ########.fr       */
+/*   Updated: 2023/02/24 16:27:24 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void	*check_death(void *args)
 		sem_post(((t_philo *)args)->read);
 		if (now > ((t_philo *)args)->input.death_time)
 		{
-			get_message((t_philo *)args, ((t_philo *)args)->n, "died");
+			get_message((t_philo *)args, ((t_philo *)args)->n,
+				"died", "\033[1;31m");
 			break ;
 		}
 	}
@@ -41,7 +42,7 @@ static void	eat(t_philo *philo)
 	sem_wait(philo->read);
 	philo->last_ate = now;
 	sem_post(philo->read);
-	get_message(philo, philo->n, "is eating");
+	get_message(philo, philo->n, "is eating", "\033[1;32m");
 	usleep(philo->input.eat_time * 1000);
 	if (philo->input.eat_req)
 	{
@@ -61,15 +62,15 @@ void	routine(t_philo *philo)
 	while (1)
 	{
 		sem_wait(philo->fork);
-		get_message(philo, philo->n, "has taken a fork");
+		get_message(philo, philo->n, "has taken a fork", "\033[1;36m");
 		sem_wait(philo->fork);
-		get_message(philo, philo->n, "has taken a fork");
+		get_message(philo, philo->n, "has taken a fork", "\033[1;36m");
 		eat(philo);
 		sem_post(philo->fork);
 		sem_post(philo->fork);
-		get_message(philo, philo->n, "is sleeping");
+		get_message(philo, philo->n, "is sleeping", "\033[1;30m");
 		usleep(philo->input.sleep_time * 1000);
-		get_message(philo, philo->n, "is thinking");
+		get_message(philo, philo->n, "is thinking", "\033[1;30m");
 	}
 }
 
