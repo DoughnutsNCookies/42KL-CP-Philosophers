@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 16:36:58 by schuah            #+#    #+#             */
-/*   Updated: 2023/02/24 16:28:58 by schuah           ###   ########.fr       */
+/*   Updated: 2023/02/27 19:27:18 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ static int	init_sema(t_philo *philo, t_input input)
 	sem_unlink("write");
 	philo->fork = sem_open("fork", O_CREAT, S_IRWXU, input.n_philo);
 	if (philo->fork == SEM_FAILED)
-		return (1);
+		return (-1);
 	philo->sema = sem_open("sema", O_CREAT, S_IRWXU, 0);
 	if (philo->sema == SEM_FAILED)
-		return (1);
+		return (-1);
 	philo->read = sem_open("read", O_CREAT, S_IRWXU, 1);
 	if (philo->read == SEM_FAILED)
-		return (1);
+		return (-1);
 	philo->write = sem_open("write", O_CREAT, S_IRWXU, 1);
 	if (philo->write == SEM_FAILED)
-		return (1);
+		return (-1);
 	return (0);
 }
 
