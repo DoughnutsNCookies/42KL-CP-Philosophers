@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:28:12 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/16 15:21:10 by schuah           ###   ########.fr       */
+/*   Updated: 2023/02/24 16:20:21 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,5 @@ int	main(int ac, char **av)
 		return (1);
 	if (init_philo(input, fork, main, philo) != 0)
 		return (1);
-	if (ft_atoi(av[1]) == 1)
-		return (force_death(philo[0]));
 	return (check_state(philo));
 }
