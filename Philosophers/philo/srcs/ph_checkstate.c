@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:32:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/02/24 16:17:41 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 15:21:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_state(t_philo *philo)
 			pthread_mutex_unlock(&(philo->philo_mutex));
 			if (check_is_dead(&philo[i]))
 			{
-				get_message(philo, philo->n, "died", "\033[1;31m");
+				get_message(philo, philo->n, "died");
 				return (0);
 			}
 			i++;

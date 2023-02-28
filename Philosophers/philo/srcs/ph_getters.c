@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:12:25 by schuah            #+#    #+#             */
-/*   Updated: 2023/02/24 16:25:35 by schuah           ###   ########.fr       */
+/*   Updated: 2022/08/16 14:02:18 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ struct timeval	get_starttime(void *timezone)
 }
 
 /* Prints out messages based on events */
-void	get_message(t_philo *philo, int i, char *str, char *color)
+void	get_message(t_philo *philo, int i, char *str)
 {
 	pthread_mutex_lock(&philo->main.write_mutex);
-	printf("%s%d\t %d %s\033[0m\n",
-		color, get_time(philo->main.start_time, NULL), i, str);
+	printf("%d\t %d %s\n", get_time(philo->main.start_time, NULL),
+		i, str);
 	pthread_mutex_unlock(&philo->main.write_mutex);
 }
