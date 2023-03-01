@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_philosophizing.c                                :+:      :+:    :+:   */
+/*   ph_philosophizing_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 21:10:16 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/16 15:32:40 by schuah           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:10:02 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,33 @@
 static void	*check_death(void *args)
 {
 	int		now;
+	t_philo	*philo;
 
+	philo = args;
 	while (1)
 	{
-		sem_wait(((t_philo *)args)->read);
-		now = get_time(((t_philo *)args)->last_ate, NULL);
-		sem_post(((t_philo *)args)->read);
-		if (now > ((t_philo *)args)->input.death_time)
+		ft_usleep(philo->input.death_time / 2);
+		sem_wait(philo->read);
+		now = get_time(philo->last_ate, NULL);
+		sem_post(philo->read);
+		if (now > philo->input.death_time)
 		{
-			get_message((t_philo *)args, ((t_philo *)args)->n, "died");
+			get_message((t_philo *)args, philo->n, "died");
 			break ;
 		}
 	}
-	finish_and_exit((t_philo *)args);
+	finish_and_exit(philo);
 	return (NULL);
 }
 
 /* Resets philosopher's last ate time and reduce its max eat by one each eat */
 static void	eat(t_philo *philo)
 {
-	struct timeval	now;
-
-	gettimeofday(&now, NULL);
 	sem_wait(philo->read);
-	philo->last_ate = now;
+	gettimeofday(&philo->last_ate, NULL);
 	sem_post(philo->read);
 	get_message(philo, philo->n, "is eating");
-	usleep(philo->input.eat_time * 1000);
+	ft_usleep(philo->input.eat_time);
 	if (philo->input.eat_req)
 	{
 		philo->input.eat_max--;
@@ -54,8 +54,16 @@ static void	eat(t_philo *philo)
 /* The routine each philosopher has to go through for the rest of their lives */
 void	routine(t_philo *philo)
 {
+	char	*sem_name;
+	char	*philo_id;
+
 	if (philo->n % 2 == 0)
-		usleep(2500);
+		ft_usleep(500);
+	philo_id = ft_itoa(philo->n);
+	sem_name = ft_strjoin("read", philo_id);
+	create_sema(philo->read, sem_name, 1);
+	free(philo_id);
+	free(sem_name);
 	pthread_create(&philo->death_thread, NULL, &check_death, philo);
 	pthread_detach(philo->death_thread);
 	while (1)
@@ -68,7 +76,7 @@ void	routine(t_philo *philo)
 		sem_post(philo->fork);
 		sem_post(philo->fork);
 		get_message(philo, philo->n, "is sleeping");
-		usleep(philo->input.sleep_time * 1000);
+		ft_usleep(philo->input.sleep_time);
 		get_message(philo, philo->n, "is thinking");
 	}
 }
@@ -95,11 +103,6 @@ void	check_stomach(t_philo *philo, t_input input)
 void	finish_and_exit(t_philo *philo)
 {
 	waitpid(-1, NULL, 0);
-	kill(0, SIGINT);
 	free(philo->pid);
-	sem_close(philo->fork);
-	sem_close(philo->sema);
-	sem_close(philo->read);
-	sem_close(philo->write);
-	exit(0);
+	kill(0, SIGINT);
 }

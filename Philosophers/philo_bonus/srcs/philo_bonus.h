@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:36:29 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/16 12:26:26 by schuah           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:53:20 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,14 @@ typedef struct s_philo
 /* Libft */
 long			ft_atoi(const char *str);
 int				str_is_digit(char *str);
+char			*ft_strjoin(char const *s1, char const *s2);
+void			ft_usleep(int sec);
+char			*ft_itoa(int n);
 
 /* Initializing */
 void			init_arg(t_input *input, int ac, char **av);
 int				init_philo(t_philo *philo, t_input input);
+int				create_sema(sem_t *sem, char *name, int count);
 
 /* Getters */
 struct timeval	get_starttime(void *timezone);

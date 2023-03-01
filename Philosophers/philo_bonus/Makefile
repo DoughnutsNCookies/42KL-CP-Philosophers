@@ -6,13 +6,14 @@
 #    By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 10:52:13 by schuah            #+#    #+#              #
-#    Updated: 2022/09/21 14:16:43 by schuah           ###   ########.fr        #
+#    Updated: 2023/03/01 17:28:33 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	philo_bonus
 CC			=	gcc
-RM			=	rm -f
+RM			=	rm -rf
+MKDIR		=	mkdir -p
 CFLAGS		=	-Wall -Wextra -Werror
 # CFLAGS		+= 	-pthread
 # CFLAGS		+= 	-g -fsanitize=thread
@@ -20,18 +21,18 @@ SRCS_FILES	=	ph_main_bonus \
 				ph_init_bonus \
 				ph_libft_bonus \
 				ph_getters_bonus \
-				ph_philosophizing
+				ph_philosophizing_bonus
 SRCS		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
 SRCS_DIR	=	srcs/
 OBJS_DIR	=	objs/
 
 all:			
-				mkdir -p $(OBJS_DIR)
+				$(MKDIR) $(OBJS_DIR)
 				make $(NAME)
 
 bonus:			
-				mkdir -p $(OBJS_DIR)
+				$(MKDIR) $(OBJS_DIR)
 				make $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
@@ -41,10 +42,10 @@ $(NAME):		$(OBJS)
 				$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-				rm -rf $(OBJS_DIR)
+				$(RM) $(OBJS_DIR)
 
 fclean:			clean
-				rm -rf $(NAME)
+				$(RM) $(NAME)
 
 re:				fclean all
 
