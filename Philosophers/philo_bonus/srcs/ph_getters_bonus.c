@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:39:02 by schuah            #+#    #+#             */
-/*   Updated: 2022/08/16 14:02:22 by schuah           ###   ########.fr       */
+/*   Updated: 2023/03/01 13:56:28 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* Gets the current time in int form */
 int	get_time(struct timeval old, void *timezone)
 {
-	static struct timeval	time;
+	struct timeval	time;
 
 	gettimeofday(&time, timezone);
 	return (((time.tv_sec - old.tv_sec) * 1000)
