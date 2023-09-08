@@ -10,11 +10,25 @@ By recreating the dining philosophers' problem, I was able to delve into the cha
 
 
 ## Dining Philosophers Problem
-A group of `N` philosophers is seated around a circular table, engaging in three activities: `eating`, `thinking`, and `sleeping`.
+A group of `N` philosophers sit at a round table. There is a large bowl of spaghetti in the middle of the table.
 
-The issue is that each philosopher requires `two` forks to eat, and there are only `N` forks available, with `one` fork placed between every `two` neighboring philosophers.
+The philosophers alternatively `eat`, `think`, or `sleep`.
+  - While `eating`, they are not `thinking` or `sleeping`
+  - While `thinking`, they are not `eating` or `sleeping`;
+  - While `sleeping`, they are not `eating` or `thinking`.
 
-The task is to devise an algorithm that the philosophers can adhere to, ensuring that none of them go hungry and `dies`.
+There are also forks on the table. There are as many forks as philosophers.
+  - A philosopher takes their `right` and their `left` forks to `eat`, `one in each hand`.
+  - When a philosopher has finished eating, they `put their forks back on the table` and start `sleeping`.
+  - Once awake, they start `thinking` again. The simulation `stops` when a philosopher `dies` of starvation.
+
+Every philosopher needs to `eat` and should `never starve`.
+
+Philosophers don’t speak with each other.
+
+Philosophers don’t know if another philosopher is about to `die`.
+
+No need to say that philosophers `should avoid dying`!
 
 
 ## Mandatory
